@@ -45,7 +45,9 @@ public final class ImageLoader: ObservableObject {
             self?.loadImage()
         }, receiveCancel: { [weak self] in
             self?.cancellable?.cancel()
-        }).eraseToAnyPublisher()
+        })
+        .receive(on: DispatchQueue.main)
+        .eraseToAnyPublisher()
     }
     
     private func loadImage() {
